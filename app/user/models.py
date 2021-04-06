@@ -58,13 +58,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
 
         return self.email
-
-    def save(self, *args, **kwargs):
-        """
-        On save update timestamp
-        """
-        if not self.id:
-            self.created_at = timezone.now()
-        self.updated_at = timezone.now()
-
-        return super(User, self).save(*args, **kwargs)

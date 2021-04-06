@@ -17,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
             _('Permissons'),
             {'fields': ('is_active', 'is_staff', 'is_superuser', 'is_verified')}
         ),
-        (_('Important dates'), {'fields': ('last_login', )})
+        (_('Important dates'), {'fields': ('last_login',)})
     )
     add_fieldsets = (
         (None, {
