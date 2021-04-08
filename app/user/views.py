@@ -3,12 +3,16 @@ from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 
 from rest_framework.response import Response
-from rest_framework import generics, views, status, permissions
+from rest_framework import generics, views, status, permissions, authentication
 from rest_framework.authtoken.models import Token
 import jwt
 
 from user import serializers
-from user.utils import send_email_verify
+from user.utils import (send_email_verify,
+                        send_email_password_reset,
+                        normalize_email,
+                        decode_token_to_get_user
+                        )
 
 
 class RegisterUserView(generics.GenericAPIView):
@@ -45,6 +49,7 @@ class VerifyEmailView(views.APIView):
     def get(self, request, format=None):
         token = request.GET.get('token')
         try:
+            # decode token to get user id
             payload = jwt.decode(
                 jwt=token,
                 key=settings.SECRET_KEY,
@@ -58,7 +63,7 @@ class VerifyEmailView(views.APIView):
             return Response({'email': 'Successfully activated!'}, status=status.HTTP_200_OK)
         # in case token is expired
         except jwt.ExpiredSignatureError:
-            return Response({'error': 'Activation Expired !'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Activation Expired!'}, status=status.HTTP_400_BAD_REQUEST)
         # in case token is invalid
         except jwt.exceptions.DecodeError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
@@ -110,6 +115,7 @@ class LogoutView(views.APIView):
     """
     Logout user deletting token in the database
     """
+    authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
@@ -121,3 +127,81 @@ class LogoutView(views.APIView):
             token.delete()
         content = {'success': f"User {request.user} has logged out successfully."}
         return Response(content, status=status.HTTP_200_OK)
+
+
+class ManageUserView(generics.RetrieveUpdateAPIView):
+    """
+    Manage the authenticated user
+    """
+    serializer_class = serializers.UserSerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated),
+
+    def get_object(self):
+        """
+        Retrieve and return authenticated user
+        """
+        # sending email verification if user updated email
+        user = get_object_or_404(get_user_model(), email=self.request.user.email)
+        if user.email != self.request.data.get('email'):
+            changed_email = normalize_email(self.request.data.get('email'))
+            if changed_email != None:
+                send_email_verify(user, self.request, changed_email)
+                user.is_verified = False
+                user.save()
+
+        return user
+
+
+class PasswordResetEmail(generics.GenericAPIView):
+    """
+    Password reset email for the user
+    """
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = serializers.ResetPasswordEmailSerializer
+
+    def post(self, request):
+
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        email = serializer.data.get('email')
+        user = get_object_or_404(get_user_model(), email=email)
+
+        send_email_password_reset(user, request)
+
+        return Response(
+                    {'success': 'The link to reset your password was sent to email.'},
+                    status=status.HTTP_200_OK
+                    )
+
+
+class PasswordResetView(generics.GenericAPIView):
+    """
+    Checking sent token to reset password
+    and setting new password for user
+    """
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = serializers.SetNewPasswordSerializer
+
+    def get(self, request, token, format=None):
+        """
+        Check if reset link is valid
+        """
+        # if sent token expired and user doesnt exist raise 404
+        response = decode_token_to_get_user(token, request)
+
+        return response
+
+    def post(self, request, token):
+        """
+        Get user from decoded token and set new password
+        """
+        serializer = self.serializer_class(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        password = serializer.data['password']
+
+        response = decode_token_to_get_user(token, request, password)
+
+        return response
