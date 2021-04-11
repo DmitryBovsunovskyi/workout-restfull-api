@@ -47,15 +47,17 @@ class VerifyEmailView(views.APIView):
     serializer_class = serializers.EmailVerificationSerializer
 
     def get(self, request, format=None):
-        token = request.GET.get('token')
+
         try:
+            token = request.GET.get('token')
+
             # decode token to get user id
             payload = jwt.decode(
                 jwt=token,
                 key=settings.SECRET_KEY,
                 algorithms=['HS256']
                 )
-            user = get_user_model().objects.get(id=payload['user_id'])
+            user = get_object_or_404(get_user_model(), id=payload['user_id'])
             if not user.is_verified:
                 user.is_verified = True
                 user.save()
@@ -91,8 +93,13 @@ class LoginView(views.APIView):
                 if user.is_verified:
                     if user.is_active:
                         token, created = Token.objects.get_or_create(user=user)
-                        return Response({'token': token.key},
-                                        status=status.HTTP_200_OK)
+                        # if user is already logged in
+                        if token.key == str(request.auth):
+                            return Response({'detail': 'You are already logged in.'},
+                                            status=status.HTTP_403_FORBIDDEN)
+                        else:
+                            return Response({'token': token.key},
+                                            status=status.HTTP_200_OK)
                     else:
                         content = {'detail': 'User account not active.'}
                         return Response(content,
