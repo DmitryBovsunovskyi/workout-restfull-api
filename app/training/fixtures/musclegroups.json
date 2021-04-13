@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 1,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Abs",
+	        "description": "We all want great abs! Abdominals have come to be the center piece of the physique, a real show piece. Both men and women have 'great abs' or '6-pack' on their goal lists. Nothing is more appealing than a healthy and fit body with a nicely trimmed waist. The important key for anybody to realize is that everyone has abdominals, they are simply covered in fat and need toning. Now, I must point out that you cannot spot reduce fat from your abdominal region; when you lose fat, it is lost equally throughout your entire body. However, you can encourage this fat loss process by exercising the abdominals regularly. It is essential to take into consideration that to have a complete abdominal development, you must train all the four areas of the abdominal region equally. The hardest area to see progress in are the lower abdominals, but this is only due to the fact that more fat is stored there than in the other areas."
+        }
+    },
+    {
+        "pk": 2,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Arms",
+ 	        "description": "We all want great abs! Abdominals have come to be the center piece of the physique, a real show piece. Both men and women have 'great abs' or '6-pack' on their goal lists. Nothing is more appealing than a healthy and fit body with a nicely trimmed waist. The important key for anybody to realize is that everyone has abdominals, they are simply covered in fat and need toning. Now, I must point out that you cannot spot reduce fat from your abdominal region; when you lose fat, it is lost equally throughout your entire body. However, you can encourage this fat loss process by exercising the abdominals regularly. It is essential to take into consideration that to have a complete abdominal development, you must train all the four areas of the abdominal region equally. The hardest area to see progress in are the lower abdominals, but this is only due to the fact that more fat is stored there than in the other areas."
+        }
+    },
+    {
+        "pk": 3,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Shoulders",
+ 	        "description": "The shoulders are a key muscle group in creating the balanced physique. It has always been the desire of people to have broad shoulders, let it be male or female. We have for centuries padded our suits and dresses to give the illusion of wide, powerful shoulders. Having wide shoulders also adds to the illusion of a V-taper which will make your waist look smaller. In general, the method to follow in the development of this V-taper look is to focus on the development of the side of the shoulders or side deltoids."
+       }
+    },
+    {
+        "pk": 4,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Back",
+	        "description": "The development of the muscles of the back are important for posture, strength and overall well being. In individuals, the development of a wide back can always give the illusion of a narrow waist. It is significant to have a strong lower back which will support you in many exercises, as well as in many tasks in your daily life. Trapezius muscles are also key as they help and aid your shoulder muscles and are a strong factor in preventing injuries."
+        }
+    },
+    {
+        "pk": 5,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Legs",
+	        "description": "Thigh strength and muscle development is very important to an overall physique. Legs are perhaps the most neglected areas to train and exercise simply because they take a lot of effort physically to exercise. How many times have we seen an individual with a very well built upper body, to later find out they have weak or underdeveloped legs? Thigh training takes a toll on the body unlike any other as you fatigue and mentally drain. Having strong legs will help you in all sports as well as in daily life. The thighs are split into two major muscle group areas, the quadriceps and hamstrings."
+        }
+    },
+    {
+        "pk": 6,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Buttocks",
+	        "description": "The back side is a region that is usually on the top of the list of areas to tone or tighten for both men and women. Not only for appearance purposes, the buttocks are actually quite instrumental for daily fitness and activities. Poor buttocks can affect your health such as back pain and everyday tasks such as standing and sitting."
+        }
+    },
+    {
+        "pk": 7,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Hips",
+	        "description": "The hip muscles are located at the top of the thigh as well as the inner and out parts. Many women as well as men aim to tone and strengthen this are to improve a leaner and healthier physique. Besides attaining a phsyical goal you may have, having strong and healthy hip muscle will promote healthier bones and help prevent injuries with age, sports or any other reason."
+        }
+    },
+    {
+        "pk": 8,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Chest",
+	        "description": "It is well know that the chest is one of the most sought after well developed body parts for men along with arms and abdominals, however it is quite beneficial for women as well. It is a misconception that chest training reduces bust size for women. Finally, even though genetics spell out the shape and size of your pectoral muscles, as with all of your muscle groups, your training discipline can help you reach your physique goals."
+        }
+    },
+    {
+        "pk": 9,
+        "model": "training.musclegroup",
+        "fields": {
+            "name": "Cardio",
+	        "description": ""
+        }
+    }
+]

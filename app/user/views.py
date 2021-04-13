@@ -90,7 +90,7 @@ class LoginView(views.APIView):
             )
 
             if user:
-                if user.is_verified:
+                if user.is_verified or user.is_superuser:
                     if user.is_active:
                         token, created = Token.objects.get_or_create(user=user)
                         # if user is already logged in
