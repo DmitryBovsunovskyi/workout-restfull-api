@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 1,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Crunch",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 2,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Cable Crunches",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 3,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Hanging Leg Tucks",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 4,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Hanging Oblique Tucks",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 5,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Leg Raises",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 6,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Lying Front Kicks",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 7,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Machine Crunches",
+  	        "description": "",
+            "muscles": [1]
+        }
+    },
+    {
+        "pk": 8,
+        "model": "training.exercise",
+        "fields": {
+            "name": "Side Plank with Straight Leg",
+  	        "description": "",
+            "muscles": [1]
+        }
+    }
+]
