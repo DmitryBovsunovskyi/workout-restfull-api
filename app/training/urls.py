@@ -13,4 +13,5 @@ app_name = 'training'
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]
