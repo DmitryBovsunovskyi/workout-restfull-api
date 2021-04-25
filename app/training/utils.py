@@ -1,6 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import permissions, viewsets
 from training import serializers
+from training import models
 
 class BaseViewTraining(viewsets.ModelViewSet):
     """
